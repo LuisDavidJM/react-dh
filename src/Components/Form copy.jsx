@@ -1,13 +1,20 @@
-import React, { useState } from "react";
-import Message from "./Message";
+import { useState } from "react";
 
 const Form = ({ selected }) => {
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
+  const [customer, setCustomer] = useState({
+    name: "",
+    email: "",
+  });
   const [flag, setFlag] = useState(false);
   //Crear un estado para renderizar el mensaje de error
 
   const emailRegex = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/;
+  const handleName = (e) => {
+    setCustomer({ ...customer, name: e.target.value });
+  };
+  const handleEmail = (e) => {
+    setCustomer({ ...customer, email: e.target.value });
+  };
   const handleSubmit = (e) => {
     e.preventDefault();
     //Faltan hacer las validaciones
@@ -18,20 +25,12 @@ const Form = ({ selected }) => {
     <div>
       <form onSubmit={handleSubmit}>
         <label>Nombre: </label>
-        <input
-          type="text"
-          value={name}
-          onChange={(e) => setName(e.target.value)}
-        />
+        <input type="text" onChange={handleName} />
         <label>Email: </label>
-        <input
-          type="email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-        />
+        <input type="email" onChange={handleEmail} />
         <button>Comprar entrada de {selected.artista}</button>
       </form>
-      {flag ? <Message name={name} email={email} /> : null}
+      {flag ? <Message name={customer.name} email={customer.email} /> : null}
     </div>
   );
 };

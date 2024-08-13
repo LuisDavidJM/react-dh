@@ -1,14 +1,10 @@
-import "./Styles/App.css";
-import Home from "./Components/Home";
-import Navbar from "./Components/Navbar";
-import Form from "./Components/Form";
+import "./App.css";
+import Shows from "./Components/Shows";
 
 function App() {
   return (
     <>
-      <Navbar />
-      <Form />
-      <Home />
+      <Shows />
     </>
   );
 }

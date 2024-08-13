@@ -1,14 +1,9 @@
-import React from "react";
-
-const Message = ({ customer }) => {
+const Message = ({ name, email }) => {
   return (
-    <>
-      <h4>Muchas gracias, {customer.name}!</h4>
-      <h4>
-        En 30 minutos estará llegando tu pedido a la dirección:{" "}
-        {customer.address}
-      </h4>
-    </>
+    <div>
+      <h2>Gracias, {name}!</h2>
+      <h4>Te enviamos tu entrada a {email}.</h4>
+    </div>
   );
 };
 
