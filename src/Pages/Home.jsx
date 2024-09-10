@@ -1,27 +1,14 @@
-import { useEffect, useState } from "react";
 import Card from "../Components/Card";
-import axios from "axios";
-import { useRecipeStates } from "../Context/Context";
-
-const titleStyles = {
-  backgroundColor: "#ffda92",
-  color: "firebrick",
-  width: "20%",
-  margin: "10px auto",
-  borderRadius: "10px",
-};
+import { useCharStates } from "../Context";
 
 const Home = () => {
-  const { state } = useRecipeStates();
+  const { chars } = useCharStates();
   return (
-    <>
-      <h1 style={titleStyles}>Lista de recetas</h1>
-      <div className="list-container">
-        {state.recipes.map((recipe) => (
-          <Card key={recipe.id} recipe={recipe} />
-        ))}
-      </div>
-    </>
+    <div>
+      {chars.map((char) => (
+        <Card key={char.id} char={char} />
+      ))}
+    </div>
   );
 };
 

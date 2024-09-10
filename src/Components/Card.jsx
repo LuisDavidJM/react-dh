@@ -1,25 +1,20 @@
-import Button from "./Button";
-import CardStyles from "../Styles/Card.module.css";
-import Counter from "./Counter";
+import React from "react";
 import { Link } from "react-router-dom";
-import { useRecipeStates } from "../Context/Context";
+import { useCharStates } from "../Context";
 
-const Card = ({ recipe }) => {
-  const { id, image, title, pricePerServing } = recipe;
-  const { dispatch } = useRecipeStates();
+const Card = ({ char }) => {
+  const { setFavs } = useCharStates();
+  const addFav = () => {
+    setFavs((favs) => [...favs, char]);
+  };
+
   return (
-    <div className={CardStyles.cardContainer}>
-      <img src={image} alt="" className={CardStyles.cardImg} />
-      <h3>{title}</h3>
-      <h4>${pricePerServing}</h4>
-      <Counter />
-      {/* <Button onClick={() => setCart((prev) => [...prev, recipe])}> */}
-      <Button onClick={() => dispatch({ type: "ADD_CART", payload: recipe })}>
-        🛒
-      </Button>
-      <Link to={"/detail/" + id}>
-        <Button>Ver detalle</Button>
+    <div>
+      <Link to={"/detail/" + char.id}>
+        <img src={char.image} alt="" />
+        <h2>{char.name}</h2>
       </Link>
+      <button onClick={addFav}>⭐</button>
     </div>
   );
 };

@@ -3,36 +3,24 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 
 const Detail = () => {
-  const [recipe, setRecipe] = useState({});
-  const [loading, setLoading] = useState(true);
-  const params = useParams();
-  console.log(params);
-  const apiKey = "68d481a0fbc340308fbf934f836ee8c6";
-  const url = `https://api.spoonacular.com/recipes/${params.id}/information?apiKey=${apiKey}`;
+  const [detail, setDetail] = useState({});
+  const { id } = useParams();
+  console.log(id);
+
+  const url = "https://rickandmortyapi.com/api/character/" + id;
 
   useEffect(() => {
-    axios(url)
-      .then((res) => {
-        console.log(res.data);
-        setRecipe(res.data);
-        setTimeout(() => {
-          setLoading(false);
-        }, 2000);
-      })
-      .catch((err) => console.log(err));
+    axios(url).then((res) => {
+      console.log(res.data);
+      setDetail(res.data);
+    });
   }, []);
 
   return (
     <div>
-      {loading ? (
-        "Hagamos de cuenta que soy un spinner..."
-      ) : (
-        <>
-          <h1>{recipe.title}</h1>
-          <img src={recipe.image} alt="" />
-          <div dangerouslySetInnerHTML={{ __html: recipe.instructions }} />
-        </>
-      )}
+      <h1>{detail.name}</h1>
+      <img src={detail.image} alt="" />
+      <h3>Estado: {detail.status}</h3>
     </div>
   );
 };
